@@ -1,13 +1,20 @@
 import "./App.css";
 
 function App() {
-   const scrollGallery = (direction) => {
-    const gallery = document.getElementById("gallery");
-    const cardWidth = gallery.querySelector(".project-card").offsetWidth;
+   const scrollGallery = (direction: number) => {
+    const gallery = document.getElementById("gallery") as HTMLElement | null;
+
+    if (!gallery) return; // safety check in case it's null
+
+    const card = gallery.querySelector(".project-card") as HTMLElement | null;
+    if (!card) return; // safety check in case no card found
+
+    const cardWidth = card.offsetWidth;
     const gap = 30; // same as CSS gap
+
     gallery.scrollBy({
       left: direction * (cardWidth * 3 + gap * 3), // scroll 3 cards at a time
-      behavior: "smooth"
+      behavior: "smooth",
     });
   };
   return (
